@@ -1,4 +1,3 @@
-require("dotenv").config();
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
@@ -9,6 +8,7 @@ import auth from "./routes/auth";
 import room from "./routes/room";
 import comment from "./routes/comment";
 import passport from "passport";
+import serverless from "serverless-http";
 
 const app = express();
 
@@ -60,4 +60,6 @@ app.get("/me", authenticate, (req, res) => res.send(req.user));
 app.use(errorHandler);
 
 //start server
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+// app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+
+export const handler = serverless(app);

@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import User from "../models/user";
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
+// const GoogleStrategy = require("passport-google-oauth20").Strategy;
 import passport from "passport";
 import passportJWT from "passport-jwt";
 
@@ -25,34 +25,34 @@ var strategy = new JwtStrategy(jwtOptions, function (jwt_payload, next) {
 
 passport.use(strategy);
 
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+// passport.use(
+//   new GoogleStrategy(
+//     {
+//       clientID: process.env.GOOGLE_CLIENT_ID,
+//       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
 
-      callbackURL: process.env.CALLBACK_URL,
-    },
-    (accessToken, refreshToken, profile, done) => {
-      console.log(profile);
-      User.findOne({ googleId: profile.email }, async (err, user) => {
-        if (err) return done(err);
-        if (!user) {
-          const newUser = await User.create({
-            fullname: profile.displayName,
-            email: profile.emails[0].value,
-            username: profile.id,
-          });
-          const token = newUser.getJwtToken();
-          return done(null, { token });
-        } else {
-          const token = user.getJwtToken();
-          return done(null, { token });
-        }
-      });
-    }
-  )
-);
+//       callbackURL: process.env.CALLBACK_URL,
+//     },
+//     (accessToken, refreshToken, profile, done) => {
+//       console.log(profile);
+//       User.findOne({ googleId: profile.email }, async (err, user) => {
+//         if (err) return done(err);
+//         if (!user) {
+//           const newUser = await User.create({
+//             fullname: profile.displayName,
+//             email: profile.emails[0].value,
+//             username: profile.id,
+//           });
+//           const token = newUser.getJwtToken();
+//           return done(null, { token });
+//         } else {
+//           const token = user.getJwtToken();
+//           return done(null, { token });
+//         }
+//       });
+//     }
+//   )
+// );
 
 const authenticate = async (req, res, next) => {
   try {

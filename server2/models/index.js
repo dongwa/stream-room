@@ -2,8 +2,9 @@ require("dotenv").config();
 import mongoose from "mongoose";
 
 //connect to database
-//
-const mongoConnectionURL = `mongodb+srv://rishav:${process.env.DB_PASSWORD}@cluster0.du1zz.mongodb.net/netflix?retryWrites=true&w=majority`;
+const mongoConnectionURL = `mongodb+srv://783137663:${process.env.DB_PASSWORD}@cluster0.gkpf5jx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
+
+// const mongoConnectionURL = `mongodb+srv://rishav:${process.env.DB_PASSWORD}@cluster0.du1zz.mongodb.net/netflix?retryWrites=true&w=majority`;
 const databaseName = "netflix";
 
 const connectDB = () => {
